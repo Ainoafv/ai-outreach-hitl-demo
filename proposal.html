@@ -2,215 +2,707 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>AI Outreach Application — Technical Proposal</title>
+<title>Technical &amp; Commercial Proposal — AI Email Outreach Application</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@700;800&family=Inter:wght@400;500;600&display=swap');
-  @page { size: A4; margin: 10mm; }
+  @import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=Inter:wght@400;500;600&display=swap');
+  @page { size: A4; margin: 12mm; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  :root { --ink:#0f172a; --accent:#2563eb; --soft:#eff6ff; --warn:#b45309; --warn-bg:#fffbeb; --ok:#059669; --rule:#e2e8f0; --mute:#64748b; }
-  body { font-family: Inter, sans-serif; font-size: 8.8pt; color: #334155; background: #eef2f7; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  .page { width: 210mm; min-height: 287mm; margin: 0 auto 8mm; background: #fff; padding: 10mm 12mm; page-break-after: always; }
+  :root {
+    --navy: #0c1929;
+    --navy-mid: #1e3a5f;
+    --accent: #1d4ed8;
+    --accent-light: #dbeafe;
+    --text: #1e293b;
+    --mute: #64748b;
+    --rule: #cbd5e1;
+    --soft: #f8fafc;
+    --ok: #047857;
+    --ok-bg: #ecfdf5;
+    --warn-bg: #fffbeb;
+    --warn: #b45309;
+  }
+  body {
+    font-family: Inter, system-ui, sans-serif;
+    font-size: 9pt;
+    color: var(--text);
+    background: #e2e8f0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .page {
+    width: 210mm;
+    min-height: 276mm;
+    margin: 0 auto 6mm;
+    background: #fff;
+    padding: 14mm 16mm;
+    page-break-after: always;
+    position: relative;
+  }
   .page:last-child { page-break-after: auto; }
-  .brand { display: flex; justify-content: space-between; border-bottom: 1.5pt solid var(--ink); padding-bottom: 3mm; margin-bottom: 4mm; }
-  .brand-name { font-family: "Inter Tight"; font-weight: 800; font-size: 10.5pt; }
-  h1 { font-family: "Inter Tight"; font-size: 13pt; font-weight: 800; color: var(--ink); margin-bottom: 1.5mm; line-height: 1.15; }
-  .lead { font-size: 7.8pt; color: var(--mute); margin-bottom: 3mm; line-height: 1.4; }
-  h2 { font-family: "Inter Tight"; font-size: 7.8pt; font-weight: 700; text-transform: uppercase; letter-spacing: .35pt; margin: 3mm 0 1.5mm; color: var(--ink); }
-  p, li { font-size: 7.4pt; line-height: 1.38; margin-bottom: 1mm; }
-  ul { padding-left: 3.5mm; margin-bottom: 2mm; }
-  table { width: 100%; border-collapse: collapse; font-size: 6.8pt; margin: 1.5mm 0 2mm; }
-  th { background: var(--ink); color: #fff; padding: 1.3mm 2mm; text-align: left; }
-  td { padding: 1.2mm 2mm; border-top: 1px solid var(--rule); vertical-align: top; }
-  .yes { color: var(--ok); font-weight: 700; }
-  .phase { color: var(--accent); font-weight: 600; }
-  .links { background: var(--soft); border: 1px solid #93c5fd; border-radius: 2mm; padding: 2.5mm 3mm; margin: 2mm 0; font-size: 7.2pt; }
-  .links a { color: var(--accent); text-decoration: none; font-weight: 600; }
-  .alert-warn { background: var(--warn-bg); border: 1px solid #fde68a; border-left: 3px solid var(--warn); padding: 2.5mm 3mm; border-radius: 2mm; margin: 2mm 0; font-size: 7.2pt; }
-  .alert-ok { background: #ecfdf5; border: 1px solid #86efac; border-left: 3px solid var(--ok); padding: 2.5mm 3mm; border-radius: 2mm; margin: 2mm 0; font-size: 7.2pt; }
-  .flow { background: var(--soft); border: 1px solid #93c5fd; border-radius: 2mm; padding: 2.5mm; font-family: ui-monospace, monospace; font-size: 6.2pt; line-height: 1.45; white-space: pre-wrap; margin: 1.5mm 0; }
-  .price-big { font-family: "Inter Tight"; font-size: 18pt; font-weight: 800; color: var(--accent); }
-  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5mm; }
-  .card { border: 1px solid var(--rule); border-radius: 2mm; padding: 2.5mm; }
-  .card h3 { font-size: 7pt; font-weight: 700; color: var(--accent); margin-bottom: 1mm; }
-  .footer { margin-top: 3mm; padding-top: 2mm; border-top: 1px solid var(--rule); font-size: 6.5pt; color: var(--mute); display: flex; justify-content: space-between; }
+
+  /* Header bar */
+  .doc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 2pt solid var(--navy);
+    padding-bottom: 4mm;
+    margin-bottom: 5mm;
+  }
+  .doc-header .left .name {
+    font-family: "Inter Tight", sans-serif;
+    font-weight: 800;
+    font-size: 11pt;
+    color: var(--navy);
+  }
+  .doc-header .left .role {
+    font-size: 7pt;
+    color: var(--mute);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin-top: 1mm;
+  }
+  .doc-meta {
+    text-align: right;
+    font-size: 7pt;
+    color: var(--mute);
+    line-height: 1.5;
+  }
+  .doc-meta strong { color: var(--navy); display: block; font-size: 7.5pt; }
+
+  /* Typography */
+  .section-num {
+    font-size: 7pt;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-bottom: 1mm;
+  }
+  h1 {
+    font-family: "Inter Tight", sans-serif;
+    font-size: 16pt;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.2;
+    margin-bottom: 3mm;
+  }
+  h1 .sub {
+    display: block;
+    font-size: 10pt;
+    font-weight: 600;
+    color: var(--mute);
+    margin-top: 2mm;
+  }
+  h2 {
+    font-family: "Inter Tight", sans-serif;
+    font-size: 8.5pt;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 4mm 0 2mm;
+    padding-bottom: 1mm;
+    border-bottom: 1px solid var(--rule);
+  }
+  p, li { font-size: 8pt; line-height: 1.45; margin-bottom: 1.5mm; }
+  ul { padding-left: 4mm; margin-bottom: 2mm; }
+
+  /* Cover blocks */
+  .cover-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3mm;
+    margin: 4mm 0;
+  }
+  .info-box {
+    border: 1px solid var(--rule);
+    border-radius: 2mm;
+    padding: 3mm 4mm;
+    background: var(--soft);
+  }
+  .info-box label {
+    display: block;
+    font-size: 6.5pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--mute);
+    margin-bottom: 1mm;
+  }
+  .info-box .val { font-size: 8pt; font-weight: 600; color: var(--navy); }
+
+  .exec-summary {
+    background: var(--navy);
+    color: #fff;
+    border-radius: 2mm;
+    padding: 4mm 5mm;
+    margin: 4mm 0;
+  }
+  .exec-summary h2 {
+    color: #93c5fd;
+    border: none;
+    font-size: 7.5pt;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin: 0 0 2mm;
+    padding: 0;
+  }
+  .exec-summary p { color: #e2e8f0; font-size: 8pt; margin: 0; line-height: 1.5; }
+
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.5mm;
+    margin: 3mm 0;
+  }
+  .kpi {
+    border: 1px solid var(--rule);
+    border-radius: 2mm;
+    padding: 3mm;
+    text-align: center;
+    background: #fff;
+  }
+  .kpi .num {
+    font-family: "Inter Tight", sans-serif;
+    font-size: 14pt;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .kpi .lbl { font-size: 6.5pt; color: var(--mute); margin-top: 1mm; line-height: 1.3; }
+
+  .links-bar {
+    background: var(--accent-light);
+    border: 1px solid #93c5fd;
+    border-radius: 2mm;
+    padding: 3mm 4mm;
+    font-size: 7.5pt;
+    margin: 3mm 0;
+  }
+  .links-bar a { color: var(--accent); text-decoration: none; font-weight: 600; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; font-size: 7.5pt; margin: 2mm 0 3mm; }
+  th {
+    background: var(--navy);
+    color: #fff;
+    padding: 2mm 2.5mm;
+    text-align: left;
+    font-weight: 600;
+    font-size: 7pt;
+  }
+  td { padding: 1.8mm 2.5mm; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  tr:nth-child(even) td { background: var(--soft); }
+  .phase-badge {
+    display: inline-block;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 6.5pt;
+    padding: .8mm 2mm;
+    border-radius: 1mm;
+  }
+  .phase-badge.rec { background: var(--ok-bg); color: var(--ok); }
+
+  /* Flow diagram */
+  .flow-wrap {
+    background: var(--soft);
+    border: 1px solid var(--rule);
+    border-radius: 2mm;
+    padding: 3mm;
+    margin: 2mm 0 3mm;
+  }
+  .flow-title {
+    font-size: 7pt;
+    font-weight: 700;
+    color: var(--mute);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin-bottom: 2mm;
+    text-align: center;
+  }
+  svg.flow { width: 100%; height: auto; display: block; }
+
+  .legend {
+    display: flex;
+    gap: 4mm;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2mm;
+    font-size: 6.5pt;
+    color: var(--mute);
+  }
+  .legend span { display: flex; align-items: center; gap: 1.5mm; }
+  .dot { width: 8px; height: 8px; border-radius: 2px; display: inline-block; }
+  .dot.human { background: #f59e0b; }
+  .dot.auto { background: var(--accent); }
+  .dot.data { background: var(--ok); }
+
+  /* Milestone roadmap */
+  .roadmap {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2mm;
+    margin: 3mm 0;
+  }
+  .mile {
+    border: 1px solid var(--rule);
+    border-radius: 2mm;
+    padding: 2.5mm;
+    position: relative;
+  }
+  .mile.highlight { border-color: var(--accent); border-width: 2px; background: #eff6ff; }
+  .mile .m-label { font-size: 6.5pt; font-weight: 700; color: var(--accent); }
+  .mile .m-price { font-family: "Inter Tight"; font-size: 11pt; font-weight: 800; color: var(--navy); }
+  .mile .m-days { font-size: 6.5pt; color: var(--mute); }
+  .mile .m-desc { font-size: 6.5pt; margin-top: 1.5mm; line-height: 1.35; color: var(--text); }
+
+  .callout {
+    border-left: 3px solid var(--ok);
+    background: var(--ok-bg);
+    padding: 3mm 4mm;
+    border-radius: 0 2mm 2mm 0;
+    font-size: 7.5pt;
+    margin: 3mm 0;
+  }
+  .callout.warn {
+    border-left-color: var(--warn);
+    background: var(--warn-bg);
+  }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; }
+
+  .footer {
+    position: absolute;
+    bottom: 10mm;
+    left: 16mm;
+    right: 16mm;
+    border-top: 1px solid var(--rule);
+    padding-top: 2mm;
+    font-size: 6.5pt;
+    color: var(--mute);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .next-steps ol { counter-reset: step; list-style: none; padding: 0; }
+  .next-steps li {
+    counter-increment: step;
+    padding: 2mm 0 2mm 8mm;
+    position: relative;
+    border-bottom: 1px solid var(--rule);
+    font-size: 7.5pt;
+  }
+  .next-steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 2mm;
+    width: 5mm;
+    height: 5mm;
+    background: var(--navy);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 6.5pt;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 </style>
 </head>
 <body>
 
+<!-- PAGE 1 — EXECUTIVE SUMMARY -->
 <div class="page">
-  <div class="brand">
-    <div>
-      <div class="brand-name">Ainoa Figueroa Vidal</div>
-      <div style="font-size:6pt;color:var(--mute);text-transform:uppercase;">AI Engineer · Outreach Automation · EU</div>
+  <div class="doc-header">
+    <div class="left">
+      <div class="name">Ainoa Figueroa Vidal</div>
+      <div class="role">AI Engineer · Outreach Automation · European Union</div>
     </div>
-    <div style="font-size:6pt;color:var(--mute);text-align:right;">Jul 2026 · v2 · Proposal for Charly Suter</div>
+    <div class="doc-meta">
+      <strong>Technical &amp; Commercial Proposal</strong>
+      Ref: AO-2026-0711-v3<br>
+      Date: 11 July 2026<br>
+      Version: 3.0 · Confidential
+    </div>
   </div>
 
-  <h1>AI-Powered Email Outreach Application<br><span style="color:var(--accent);font-size:9pt;">Architecture · phased delivery · interactive demo</span></h1>
-  <p class="lead">Modular outreach system: CSV import, AI-personalized disclosure emails, human approval before send, inbound reply tracking, 14-day follow-up, multi-campaign dashboard — built for reuse across campaigns, topics, and audiences.</p>
+  <div class="section-num">Proposal for</div>
+  <h1>AI-Powered Email Outreach Application
+    <span class="sub">Modular disclosure outreach · human approval · reply tracking · 14-day follow-up</span>
+  </h1>
 
-  <div class="links">
-    <strong>Live materials (no download needed):</strong><br>
-    Interactive demo → <a href="https://ainoafv.github.io/ai-outreach-hitl-demo/">ainoafv.github.io/ai-outreach-hitl-demo</a><br>
-    This proposal (web) → <a href="https://ainoafv.github.io/ai-outreach-hitl-demo/proposal.html">…/proposal.html</a><br>
-    PDF (same content) → <a href="https://ainoafv.github.io/ai-outreach-hitl-demo/AI-Outreach-Technical-Proposal.pdf">…/AI-Outreach-Technical-Proposal.pdf</a>
+  <div class="cover-grid">
+    <div class="info-box">
+      <label>Prepared for</label>
+      <div class="val">Charly Suter · KMU Digitalisierung</div>
+    </div>
+    <div class="info-box">
+      <label>Engagement type</label>
+      <div class="val">Fixed-price · phased milestones · full code ownership</div>
+    </div>
+    <div class="info-box">
+      <label>Recommended start</label>
+      <div class="val">Milestone 1 (M1) — $950 · 7–9 working days</div>
+    </div>
+    <div class="info-box">
+      <label>Full specification</label>
+      <div class="val">4 milestones · $3,450 total · ~4 weeks elapsed</div>
+    </div>
   </div>
 
-  <h2>Your requirements → how we deliver</h2>
+  <div class="exec-summary">
+    <h2>Executive summary</h2>
+    <p>
+      This proposal defines a production-grade outreach platform aligned with your job specification:
+      import contacts, generate AI-personalised emails, require human review before every send,
+      monitor replies, automate 14-day follow-ups, and manage multiple campaigns from one dashboard.
+      Delivery is structured in four fixed-price milestones so you fund incrementally, validate each phase,
+      and retain full ownership of source code and infrastructure. An interactive demo is included to
+      validate the approval workflow before development begins.
+    </p>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi"><div class="num">M1</div><div class="lbl">Working app in ~1 week</div></div>
+    <div class="kpi"><div class="num">100%</div><div class="lbl">Human approval before send</div></div>
+    <div class="kpi"><div class="num">4</div><div class="lbl">Phased milestones</div></div>
+    <div class="kpi"><div class="num">CH/EU</div><div class="lbl">Compliance-aware design</div></div>
+  </div>
+
+  <div class="links-bar">
+    <strong>Supporting materials</strong> &nbsp;·&nbsp;
+    Demo: <a href="https://ainoafv.github.io/ai-outreach-hitl-demo/">ainoafv.github.io/ai-outreach-hitl-demo</a> &nbsp;·&nbsp;
+    Web proposal: <a href="https://ainoafv.github.io/ai-outreach-hitl-demo/proposal.html">…/proposal.html</a>
+  </div>
+
+  <h2>1. Business objective</h2>
+  <p>
+    Replace manual, error-prone outreach with a <strong>controlled automation pipeline</strong>: your team
+    retains editorial control over every outbound message while AI handles personalisation at scale.
+    The system is designed for long-term reuse — new campaigns, audiences, and disclosure topics without
+    rebuilding from scratch.
+  </p>
+
+  <h2>2. Scope alignment</h2>
   <table>
-    <tr><th>Your spec</th><th>Delivery</th><th>Phase</th></tr>
-    <tr><td>Import contacts (CSV / data sources)</td><td>CSV upload + column mapping; API hook in M4</td><td class="phase">M1</td></tr>
-    <tr><td>AI-personalized outreach emails</td><td>Claude/OpenAI · structured JSON · prompt per campaign</td><td class="phase">M1</td></tr>
-    <tr><td>Enrichment (website, company data)</td><td>CSV fields + optional public URL fetch · no LinkedIn scrape</td><td class="phase">M4</td></tr>
-    <tr><td>Review · edit · approve before send</td><td>Next.js dashboard (see live demo)</td><td class="phase">M1</td></tr>
-    <tr><td>Send approved emails automatically</td><td>SMTP / Gmail via n8n queue · approved-only gate</td><td class="phase">M1</td></tr>
-    <tr><td>Monitor inbound replies</td><td>IMAP/webhook parser → status = Replied</td><td class="phase">M2</td></tr>
-    <tr><td>14-day follow-up if no reply</td><td>Scheduler + AI follow-up draft + approval</td><td class="phase">M2</td></tr>
-    <tr><td>Dashboard (Draft / Sent / Replied…)</td><td>Full status board + campaign KPIs</td><td class="phase">M3</td></tr>
-    <tr><td>Multiple campaigns · modular extensibility</td><td>Campaign model · prompt templates · plugin hooks</td><td class="phase">M3–M4</td></tr>
-    <tr><td>Source code · docs · deployment · ownership</td><td>Repo handoff · runbook · Loom · Docker deploy</td><td class="phase">M4</td></tr>
+    <tr><th style="width:32%">Requirement (your brief)</th><th>Proposed solution</th><th style="width:12%">Phase</th></tr>
+    <tr><td>Contact import (CSV / data sources)</td><td>CSV upload with column mapping; REST import hook in final phase</td><td><span class="phase-badge">M1</span></td></tr>
+    <tr><td>AI-personalised outreach emails</td><td>Claude / OpenAI · structured JSON output · per-campaign prompts</td><td><span class="phase-badge">M1</span></td></tr>
+    <tr><td>Review, edit, approve before send</td><td>Next.js approval dashboard (see interactive demo)</td><td><span class="phase-badge">M1</span></td></tr>
+    <tr><td>Automated send (approved only)</td><td>n8n send queue → SMTP / Gmail API</td><td><span class="phase-badge">M1</span></td></tr>
+    <tr><td>Inbound reply monitoring</td><td>IMAP / webhook parser → status <em>Replied</em></td><td><span class="phase-badge">M2</span></td></tr>
+    <tr><td>14-day follow-up if no reply</td><td>Scheduler · AI follow-up draft · approval gate · send</td><td><span class="phase-badge">M2</span></td></tr>
+    <tr><td>Multi-campaign dashboard</td><td>Campaign manager · KPIs · status board (Draft / Sent / Replied)</td><td><span class="phase-badge">M3</span></td></tr>
+    <tr><td>Enrichment &amp; extensibility</td><td>CSV fields + optional website fetch · plugin architecture</td><td><span class="phase-badge">M4</span></td></tr>
+    <tr><td>Source code, docs, deployment</td><td>Repository handoff · Docker · runbook · Loom training</td><td><span class="phase-badge">M4</span></td></tr>
   </table>
 
-  <h2>Architecture</h2>
-  <div class="flow">CSV import → PostgreSQL (contacts, campaigns, audit)
-→ Enrichment (CSV + optional website text)
-→ LLM (Claude primary) → structured subject + body + rationale
-→ Review UI: Draft → Edit → Approve → Reject
-→ n8n: send queue (approved only) → SMTP/Gmail
-→ Inbound parser → Replied
-→ Day-14 cron → follow-up draft → approval → send
-→ Dashboard + exportable audit log</div>
+  <div class="callout warn">
+    <strong>Budget note:</strong> The posted $400 fixed budget covers approximately 10 hours of senior
+    engineering — insufficient for a maintainable production application (~80–120 h for the full spec).
+    This proposal offers a <strong>phased entry at M1 ($950)</strong> instead of a low-quality template
+    that would fail under real campaign load.
+  </div>
+
+  <div class="footer"><span>AO-2026-0711-v3 · Page 1 of 4</span><span>Ainoa Figueroa Vidal</span></div>
+</div>
+
+<!-- PAGE 2 — SYSTEM DESIGN & FLOW -->
+<div class="page">
+  <div class="doc-header">
+    <div class="left"><div class="name">System design</div></div>
+    <div class="doc-meta">Section 3 · End-to-end workflow</div>
+  </div>
+
+  <h1>How the platform works
+    <span class="sub">From contact import to follow-up — with mandatory human gates</span>
+  </h1>
+
+  <div class="flow-wrap">
+    <div class="flow-title">End-to-end process flow</div>
+    <svg class="flow" viewBox="0 0 680 320" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="#64748b"/>
+        </marker>
+        <marker id="arr-b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="#1d4ed8"/>
+        </marker>
+      </defs>
+      <!-- Row 1 -->
+      <rect x="10" y="20" width="120" height="44" rx="6" fill="#ecfdf5" stroke="#047857" stroke-width="1.5"/>
+      <text x="70" y="40" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="700" fill="#0c1929">CSV Import</text>
+      <text x="70" y="54" text-anchor="middle" font-family="Inter,sans-serif" font-size="7" fill="#64748b">Contacts + campaigns</text>
+
+      <line x1="130" y1="42" x2="158" y2="42" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+      <rect x="160" y="20" width="120" height="44" rx="6" fill="#ecfdf5" stroke="#047857" stroke-width="1.5"/>
+      <text x="220" y="40" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="700" fill="#0c1929">PostgreSQL</text>
+      <text x="220" y="54" text-anchor="middle" font-family="Inter,sans-serif" font-size="7" fill="#64748b">Single source of truth</text>
+
+      <line x1="280" y1="42" x2="308" y2="42" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+      <rect x="310" y="20" width="120" height="44" rx="6" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1.5"/>
+      <text x="370" y="40" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="700" fill="#0c1929">AI Draft</text>
+      <text x="370" y="54" text-anchor="middle" font-family="Inter,sans-serif" font-size="7" fill="#64748b">Claude · subject + body</text>
+
+      <line x1="430" y1="42" x2="458" y2="42" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+      <rect x="460" y="12" width="130" height="60" rx="6" fill="#fffbeb" stroke="#f59e0b" stroke-width="2"/>
+      <text x="525" y="36" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="700" fill="#0c1929">Human review</text>
+      <text x="525" y="50" text-anchor="middle" font-family="Inter,sans-serif" font-size="7" fill="#64748b">Edit · Approve · Reject</text>
+      <text x="525" y="62" text-anchor="middle" font-family="Inter,sans-serif" font-size="6.5" font-weight="700" fill="#b45309">GATE 1</text>
+
+      <!-- Down from review -->
+      <line x1="525" y1="72" x2="525" y2="98" stroke="#1d4ed8" stroke-width="1.5" marker-end="url(#arr-b)"/>
+
+      <rect x="460" y="100" width="130" height="44" rx="6" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1.5"/>
+      <text x="525" y="120" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="700" fill="#0c1929">n8n Send queue</text>
+      <text x="525" y="134" text-anchor="middle" font-family="Inter,sans-serif" font-size="7" fill="#64748b">Approved emails only</text>
+
+      <line x1="460" y1="122" x2="310" y2="122" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+      <rect x="160" y="100" width="140" height="44" rx="6" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1.5"/>
+      <text x="230" y="120" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="700" fill="#0c1929">SMTP / Gmail</text>
+      <text x="230" y="134" text-anchor="middle" font-family="Inter,sans-serif" font-size="7" fill="#64748b">Outbound delivery</text>
+
+      <!-- Row 3 - inbound -->
+      <line x1="230" y1="144" x2="230" y2="178" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+      <rect x="160" y="180" width="140" height="44" rx="6" fill="#ecfdf5" stroke="#047857" stroke-width="1.5"/>
+      <text x="230" y="200" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="700" fill="#0c1929">Inbound monitor</text>
+      <text x="230" y="214" text-anchor="middle" font-family="Inter,sans-serif" font-size="7" fill="#64748b">Reply → status update</text>
+
+      <line x1="300" y1="202" x2="328" y2="202" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+      <rect x="330" y="172" width="130" height="60" rx="6" fill="#fffbeb" stroke="#f59e0b" stroke-width="2"/>
+      <text x="395" y="196" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="700" fill="#0c1929">Day-14 check</text>
+      <text x="395" y="210" text-anchor="middle" font-family="Inter,sans-serif" font-size="7" fill="#64748b">No reply? AI follow-up</text>
+      <text x="395" y="222" text-anchor="middle" font-family="Inter,sans-serif" font-size="6.5" font-weight="700" fill="#b45309">GATE 2</text>
+
+      <line x1="460" y1="202" x2="488" y2="202" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+      <rect x="490" y="180" width="120" height="44" rx="6" fill="#f8fafc" stroke="#0c1929" stroke-width="1.5"/>
+      <text x="550" y="200" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="700" fill="#0c1929">Dashboard</text>
+      <text x="550" y="214" text-anchor="middle" font-family="Inter,sans-serif" font-size="7" fill="#64748b">KPIs · audit log</text>
+
+      <!-- Audit bar -->
+      <rect x="10" y="260" width="660" height="36" rx="6" fill="#0c1929"/>
+      <text x="340" y="278" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" font-weight="600" fill="#93c5fd">AUDIT TRAIL — every action logged: import · draft · edit · approve · send · reply · follow-up</text>
+      <text x="340" y="290" text-anchor="middle" font-family="Inter,sans-serif" font-size="7" fill="#94a3b8">Timestamp · user · contact ID · campaign · status transition</text>
+    </svg>
+    <div class="legend">
+      <span><i class="dot data"></i> Data store</span>
+      <span><i class="dot auto"></i> Automated step</span>
+      <span><i class="dot human"></i> Human approval gate (mandatory)</span>
+    </div>
+  </div>
 
   <div class="grid2">
-    <div class="card">
-      <h3>Stack (matches your brief)</h3>
-      <ul>
-        <li><strong>n8n</strong> — workflows, cron, webhooks, retries</li>
-        <li><strong>Claude / OpenAI</strong> — personalization + follow-ups</li>
-        <li><strong>FastAPI + PostgreSQL</strong> — state + audit</li>
-        <li><strong>Next.js</strong> — approval UI your team uses daily</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Switzerland / EU</h3>
-      <ul>
-        <li>Human approval default — nothing sends unattended</li>
-        <li>No LinkedIn scraping (ToS + nDSG/GDPR risk)</li>
-        <li>Audit trail per contact · campaign · send</li>
-        <li>German UI labels available from M3 if needed</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="alert-warn">
-    <strong>On the $400 fixed budget:</strong> Your job post describes a full production app (~80–120 h). I won't deliver a brittle template at that price — you'll get something unmaintainable or unfinished. Instead: <strong>fund M1 first</strong>, use it immediately, expand only after sign-off. Phases and pricing on page 2.
-  </div>
-
-  <div class="footer"><span>Page 1/3</span><span>Demo + proposal links above</span></div>
-</div>
-
-<div class="page">
-  <div class="brand"><div class="brand-name">Phased fixed-price delivery</div></div>
-
-  <h1>Milestones — full spec covered</h1>
-  <p class="lead">Pay per phase. Stop after any milestone if the app meets your needs. Total for complete spec: <strong>$3,450</strong>.</p>
-
-  <table>
-    <tr><th>Phase</th><th>Price</th><th>Days</th><th>You get</th></tr>
-    <tr>
-      <td><strong>M1 — Core loop ★</strong></td>
-      <td>$950</td>
-      <td>7–9</td>
-      <td>CSV · 1 campaign · AI drafts · <strong>approval UI</strong> · SMTP send · PostgreSQL · staging deploy · docs</td>
-    </tr>
-    <tr>
-      <td><strong>M2 — Inbox + follow-up</strong></td>
-      <td>$900</td>
-      <td>6–8</td>
-      <td>Reply detection · 14-day follow-up · approval gate · scheduler</td>
-    </tr>
-    <tr>
-      <td><strong>M3 — Multi-campaign</strong></td>
-      <td>$850</td>
-      <td>5–7</td>
-      <td>Multiple campaigns · prompts per campaign · full status dashboard · n8n export</td>
-    </tr>
-    <tr>
-      <td><strong>M4 — Enrichment + handoff</strong></td>
-      <td>$750</td>
-      <td>4–6</td>
-      <td>Website enrichment · plugin architecture · full source transfer · runbook · Loom training</td>
-    </tr>
-    <tr><td colspan="2"><strong>Total</strong></td><td colspan="2"><strong>$3,450 · full ownership · ~4 weeks elapsed</strong></td></tr>
-  </table>
-
-  <h2>M1 acceptance checklist (sign-off criteria)</h2>
-  <table>
-    <tr><th>#</th><th>Test</th><th>Pass when</th></tr>
-    <tr><td>1</td><td>CSV import</td><td>≥50 contacts imported with mapped columns</td></tr>
-    <tr><td>2</td><td>AI draft</td><td>Claude generates subject + body from contact row + campaign prompt</td></tr>
-    <tr><td>3</td><td>Approval gate</td><td>Unapproved emails cannot send</td></tr>
-    <tr><td>4</td><td>Send</td><td>Approved email delivers via your SMTP/Gmail on staging</td></tr>
-    <tr><td>5</td><td>Audit</td><td>Every action logged with timestamp + user + status</td></tr>
-    <tr><td>6</td><td>Handoff</td><td>Repo + env docs + 5-min Loom walkthrough</td></tr>
-  </table>
-
-  <div class="alert-ok">
-    <strong>Recommendation:</strong> Start with <strong>M1 ($950)</strong>. You have a working tool in ~1 week. M2 adds the reply/follow-up automation from your spec. No need to fund the full $3,450 upfront.
-  </div>
-
-  <h2>Alternative</h2>
-  <p>Hourly <strong>$42/hr</strong> with cap <strong>$3,800</strong>, same milestones — if you prefer weekly visibility over fixed blocks.</p>
-
-  <div class="footer"><span>Page 2/3</span><span>M1 = working app, not a mockup</span></div>
-</div>
-
-<div class="page">
-  <div class="brand"><div class="brand-name">Timeline · next steps</div></div>
-
-  <h1>M1 schedule (from funding)</h1>
-  <table>
-    <tr><th>Day</th><th>Deliverable</th></tr>
-    <tr><td>1–2</td><td>Schema · CSV import · campaign + prompt model</td></tr>
-    <tr><td>3–5</td><td>Approval UI · edit flow · SMTP · staging deploy</td></tr>
-    <tr><td>6–7</td><td>3 real contacts end-to-end · fixes · docs + Loom</td></tr>
-  </table>
-
-  <h2>What I need from you to start</h2>
-  <ul>
-    <li>Sample CSV (or anonymized export) + 2–3 example emails that worked well</li>
-    <li>SMTP/Gmail credentials (staging) + Claude or OpenAI API key</li>
-    <li>Campaign copy guidelines (tone, disclosure rules, forbidden claims)</li>
-    <li>Confirm: German UI in M1, or English OK for v1?</li>
-  </ul>
-
-  <h2>Relevant experience</h2>
-  <ul>
-    <li>Production outbound with <strong>human-in-the-loop + audit</strong> before any external send</li>
-    <li>CRM AI classification — structured JSON, reason codes, real business rules</li>
-    <li>Regulated AI (EU hospital) — fail-closed, nothing ships unapproved</li>
-    <li>Demo: <a href="https://ainoafv.github.io/agent-engineering-demo/">agent-engineering-demo</a></li>
-  </ul>
-
-  <h2>Working model</h2>
-  <ul>
-    <li>Async-first — Loom + written updates; no standing calls required</li>
-    <li>You own 100% of code after each milestone</li>
-    <li>Long-term partner mindset — same phased rhythm as your prior AI builds on Upwork</li>
-  </ul>
-
-  <div style="margin-top:4mm;display:flex;justify-content:space-between;align-items:flex-end;">
     <div>
-      <div class="price-big">M1 · $950</div>
-      <div style="font-size:7pt;color:var(--mute);">Recommended start · full spec = $3,450 across 4 phases</div>
+      <h2>3.1 Technology stack</h2>
+      <table>
+        <tr><th>Layer</th><th>Technology</th><th>Rationale</th></tr>
+        <tr><td>Automation</td><td><strong>n8n</strong></td><td>Matches your spec; visual workflows; cron + webhooks</td></tr>
+        <tr><td>AI</td><td><strong>Claude Sonnet</strong></td><td>Long-context personalisation; OpenAI fallback optional</td></tr>
+        <tr><td>Backend</td><td><strong>FastAPI</strong></td><td>LLM orchestration, state machine, enrichment plugins</td></tr>
+        <tr><td>Database</td><td><strong>PostgreSQL</strong></td><td>Campaigns, contacts, audit — ACID compliance</td></tr>
+        <tr><td>Frontend</td><td><strong>Next.js</strong></td><td>Approval dashboard; DE labels available from M3</td></tr>
+        <tr><td>Email</td><td><strong>SMTP / Gmail</strong></td><td>Your credentials; no vendor lock-in</td></tr>
+        <tr><td>Deploy</td><td><strong>Docker</strong></td><td>Your VPS / AWS — you own infrastructure</td></tr>
+      </table>
     </div>
-    <div style="text-align:right;font-size:7pt;color:var(--mute);">
-      Ainoa Figueroa Vidal<br>
-      github.com/Ainoafv · Spain (EU)
+    <div>
+      <h2>3.2 Compliance (Switzerland / EU)</h2>
+      <ul>
+        <li><strong>Human-in-the-loop default</strong> — no message sends without explicit approval</li>
+        <li><strong>No LinkedIn scraping</strong> — platform ToS and nDSG/GDPR exposure</li>
+        <li><strong>Enrichment scope</strong> — CSV fields + optional public website text only</li>
+        <li><strong>Full audit trail</strong> — exportable log per contact and campaign</li>
+        <li><strong>Data residency</strong> — deployed on infrastructure you control</li>
+      </ul>
+      <h2>3.3 Why this architecture</h2>
+      <p>
+        Separating the <strong>approval UI</strong> (Next.js), <strong>business logic</strong> (FastAPI),
+        and <strong>automation layer</strong> (n8n) means your team can maintain workflows visually
+        while developers extend enrichment and AI prompts without touching send infrastructure.
+      </p>
     </div>
   </div>
 
-  <div class="footer"><span>Page 3/3</span><span>Questions welcome on Upwork — happy to adjust phases</span></div>
+  <div class="footer"><span>AO-2026-0711-v3 · Page 2 of 4</span><span>Interactive demo validates Gate 1 UX</span></div>
 </div>
+
+<!-- PAGE 3 — COMMERCIAL -->
+<div class="page">
+  <div class="doc-header">
+    <div class="left"><div class="name">Commercial proposal</div></div>
+    <div class="doc-meta">Section 4 · Phased delivery &amp; pricing</div>
+  </div>
+
+  <h1>Fixed-price milestones
+    <span class="sub">Fund incrementally · sign off per phase · stop anytime</span>
+  </h1>
+
+  <div class="roadmap">
+    <div class="mile highlight">
+      <div class="m-label">M1 · RECOMMENDED</div>
+      <div class="m-price">$950</div>
+      <div class="m-days">7–9 working days</div>
+      <div class="m-desc">CSV · AI drafts · approval UI · SMTP send · PostgreSQL · staging deploy</div>
+    </div>
+    <div class="mile">
+      <div class="m-label">M2</div>
+      <div class="m-price">$900</div>
+      <div class="m-days">6–8 days</div>
+      <div class="m-desc">Inbound reply detection · 14-day follow-up · scheduler</div>
+    </div>
+    <div class="mile">
+      <div class="m-label">M3</div>
+      <div class="m-price">$850</div>
+      <div class="m-days">5–7 days</div>
+      <div class="m-desc">Multi-campaign · dashboard KPIs · n8n workflow export</div>
+    </div>
+    <div class="mile">
+      <div class="m-label">M4</div>
+      <div class="m-price">$750</div>
+      <div class="m-days">4–6 days</div>
+      <div class="m-desc">Website enrichment · plugins · source handoff · runbook</div>
+    </div>
+  </div>
+
+  <table>
+    <tr><th>Phase</th><th>Investment</th><th>Duration</th><th>Key deliverables</th></tr>
+    <tr>
+      <td><strong>M1 — Core outreach loop</strong></td>
+      <td>$950</td><td>7–9 days</td>
+      <td>CSV import · 1 campaign · Claude drafts · approval dashboard · SMTP (approved-only) · DB · staging · documentation</td>
+    </tr>
+    <tr>
+      <td><strong>M2 — Reply &amp; follow-up</strong></td>
+      <td>$900</td><td>6–8 days</td>
+      <td>Inbound parser · <em>Replied</em> status · 14-day follow-up generator · second approval gate · cron scheduler</td>
+    </tr>
+    <tr>
+      <td><strong>M3 — Scale &amp; visibility</strong></td>
+      <td>$850</td><td>5–7 days</td>
+      <td>Multiple campaigns · prompt templates · status dashboard · campaign KPIs · n8n export</td>
+    </tr>
+    <tr>
+      <td><strong>M4 — Enrichment &amp; handoff</strong></td>
+      <td>$750</td><td>4–6 days</td>
+      <td>Company URL enrichment · modular plugins · full repo transfer · Docker runbook · Loom training</td>
+    </tr>
+    <tr>
+      <td colspan="2"><strong>Total (full job specification)</strong></td>
+      <td>~4 weeks</td>
+      <td><strong>$3,450 fixed · 100% code ownership · no recurring licence to developer</strong></td>
+    </tr>
+  </table>
+
+  <div class="callout">
+    <strong>Recommendation:</strong> Commence with <strong>M1 ($950)</strong>. You receive a production-ready
+    tool your team can use immediately. M2–M4 are funded only after written sign-off on the prior milestone.
+    No upfront commitment to the full $3,450 is required.
+  </div>
+
+  <h2>4.1 M1 acceptance criteria (sign-off checklist)</h2>
+  <table>
+    <tr><th style="width:8%">#</th><th style="width:28%">Criterion</th><th>Definition of done</th></tr>
+    <tr><td>1</td><td>Contact import</td><td>≥ 50 contacts imported via CSV with correct column mapping</td></tr>
+    <tr><td>2</td><td>AI generation</td><td>Claude produces subject line + body from contact data + campaign prompt</td></tr>
+    <tr><td>3</td><td>Approval gate</td><td>System blocks send for any email not explicitly approved</td></tr>
+    <tr><td>4</td><td>Delivery</td><td>Approved email successfully delivered via your SMTP/Gmail on staging</td></tr>
+    <tr><td>5</td><td>Audit log</td><td>All actions recorded with timestamp, user, and status transition</td></tr>
+    <tr><td>6</td><td>Handoff</td><td>Git repository · environment documentation · 5-minute Loom walkthrough</td></tr>
+  </table>
+
+  <h2>4.2 Alternative engagement model</h2>
+  <p>
+    <strong>Hourly with cap:</strong> $42/hr, maximum $3,800, structured against the same milestones above.
+    Suitable if you prefer weekly progress visibility over fixed-price blocks.
+  </p>
+
+  <div class="footer"><span>AO-2026-0711-v3 · Page 3 of 4</span><span>Effective rate ~$30/h · full spec</span></div>
+</div>
+
+<!-- PAGE 4 — TIMELINE & NEXT STEPS -->
+<div class="page">
+  <div class="doc-header">
+    <div class="left"><div class="name">Implementation plan</div></div>
+    <div class="doc-meta">Section 5 · Timeline &amp; next steps</div>
+  </div>
+
+  <h1>M1 delivery schedule
+    <span class="sub">From contract start to staging handoff</span>
+  </h1>
+
+  <table>
+    <tr><th style="width:18%">Period</th><th>Activities</th><th style="width:22%">Output</th></tr>
+    <tr><td>Days 1–2</td><td>Database schema · CSV import · campaign &amp; prompt model · Claude integration v1</td><td>Backend foundation</td></tr>
+    <tr><td>Days 3–5</td><td>Approval dashboard · edit flow · SMTP integration · staging environment</td><td>Working UI + send path</td></tr>
+    <tr><td>Days 6–7</td><td>End-to-end test (3 real contacts) · bug fixes · documentation · Loom handoff</td><td>M1 sign-off ready</td></tr>
+  </table>
+
+  <div class="grid2" style="margin-top:4mm;">
+    <div>
+      <h2>5.1 Client inputs required</h2>
+      <ul>
+        <li>Sample CSV (or anonymised export) with target columns</li>
+        <li>2–3 example emails that performed well historically</li>
+        <li>SMTP/Gmail credentials (staging) + Claude or OpenAI API key</li>
+        <li>Campaign guidelines: tone, disclosure rules, forbidden claims</li>
+        <li>UI language preference: English v1, or German from M1?</li>
+      </ul>
+
+      <h2>5.2 Delivery model</h2>
+      <ul>
+        <li>Async-first: written updates + Loom walkthroughs</li>
+        <li>No standing calls required</li>
+        <li>100% source code ownership after each milestone</li>
+        <li>All communication via Upwork for audit trail</li>
+      </ul>
+    </div>
+    <div>
+      <h2>5.3 Relevant experience</h2>
+      <ul>
+        <li>Production outbound automation with mandatory human approval + audit (US B2B)</li>
+        <li>CRM AI classification — structured JSON, reason codes, business rules</li>
+        <li>Regulated AI pipelines (EU hospital) — fail-closed, nothing ships unapproved</li>
+      </ul>
+      <div class="links-bar" style="margin-top:3mm;">
+        Portfolio demo:<br>
+        <a href="https://ainoafv.github.io/agent-engineering-demo/">ainoafv.github.io/agent-engineering-demo</a>
+      </div>
+    </div>
+  </div>
+
+  <h2>5.4 Proposed next steps</h2>
+  <ol class="next-steps">
+    <li>Review the interactive demo and confirm the approval workflow meets your expectations</li>
+    <li>Confirm M1 scope, budget ($950), and preferred UI language</li>
+    <li>Create Upwork fixed-price contract for Milestone 1</li>
+    <li>Kick-off: share sample CSV, email examples, and API credentials</li>
+    <li>Receive staging deployment + M1 sign-off within 7–9 working days</li>
+  </ol>
+
+  <div style="margin-top:6mm;padding:4mm 5mm;background:var(--navy);border-radius:2mm;display:flex;justify-content:space-between;align-items:center;color:#fff;">
+    <div>
+      <div style="font-size:7pt;color:#93c5fd;text-transform:uppercase;letter-spacing:.08em;margin-bottom:1mm;">Recommended engagement</div>
+      <div style="font-family:'Inter Tight';font-size:20pt;font-weight:800;">Milestone 1 · $950</div>
+      <div style="font-size:7.5pt;color:#94a3b8;margin-top:1mm;">Full specification available across M1–M4 · $3,450 total</div>
+    </div>
+    <div style="text-align:right;font-size:7.5pt;color:#cbd5e1;line-height:1.6;">
+      <strong style="color:#fff;">Ainoa Figueroa Vidal</strong><br>
+      AI Engineer · Spain (EU)<br>
+      github.com/Ainoafv<br>
+      Questions welcome on Upwork
+    </div>
+  </div>
+
+  <div class="footer"><span>AO-2026-0711-v3 · Page 4 of 4</span><span>Confidential · prepared for Charly Suter</span></div>
+</div>
+
 </body>
 </html>
