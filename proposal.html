@@ -90,7 +90,9 @@
     border: 1px solid var(--rule);
     padding: 2.5mm 3mm;
   }
+  .facts div.pick { border-color: var(--accent); border-width: 1.5px; }
   .facts span { display: block; color: var(--mute); font-size: 6.5pt; margin-bottom: .5mm; }
+  .out { color: var(--mute); font-size: 7pt; }
 
   .links {
     font-size: 7.5pt;
@@ -164,12 +166,32 @@
   </p>
 
   <div class="facts">
-    <div><span>Start here</span><strong>M1 · $950 · 7–9 days</strong></div>
-    <div><span>Full spec</span><strong>4 milestones · $3,450</strong></div>
-    <div><span>Demo</span><strong><a href="https://ainoafv.github.io/ai-outreach-hitl-demo/">ainoafv.github.io/ai-outreach-hitl-demo</a></strong></div>
+    <div class="pick"><span>Entry · matches your post</span><strong>S0 · $450 · 4–5 days</strong><br><span class="out">n8n + Sheet + send</span></div>
+    <div><span>Production app</span><strong>M1 · $950 · 7–9 days</strong><br><span class="out">UI + DB + audit</span></div>
+    <div><span>Full spec</span><strong>M1–M4 · $3,450</strong><br><span class="out">reply + follow-up + multi</span></div>
   </div>
 
-  <h2>What your job post requires — and where it lands</h2>
+  <div class="links">
+    Demo (M1 target UX): <a href="https://ainoafv.github.io/ai-outreach-hitl-demo/">ainoafv.github.io/ai-outreach-hitl-demo</a>
+  </div>
+
+  <h2>Three ways to start</h2>
+  <table>
+    <tr><th style="width:14%"></th><th>S0 — Starter ($450)</th><th>M1 — App ($950)</th></tr>
+    <tr><td>CSV import</td><td>✓ n8n reads CSV</td><td>✓ upload + column mapping</td></tr>
+    <tr><td>Claude drafts</td><td>✓ one campaign prompt</td><td>✓ JSON schema + prompt per campaign</td></tr>
+    <tr><td>Human review</td><td>✓ Google Sheet (edit + set status)</td><td>✓ Next.js dashboard (demo)</td></tr>
+    <tr><td>Send approved only</td><td>✓ n8n watches <code>approved</code> rows</td><td>✓ API gate + n8n queue</td></tr>
+    <tr><td>Reply tracking</td><td>—</td><td>M2 ($900)</td></tr>
+    <tr><td>14-day follow-up</td><td>—</td><td>M2 ($900)</td></tr>
+    <tr><td>Multi-campaign UI</td><td>—</td><td>M3 ($850)</td></tr>
+    <tr><td>PostgreSQL + audit log</td><td>— (Sheet is the record)</td><td>✓</td></tr>
+    <tr><td>Handoff</td><td>n8n JSON export + Loom</td><td>Git repo + Docker staging</td></tr>
+  </table>
+
+  <p><strong>S0</strong> = usable outreach this week, inside your posted budget. <strong>M1</strong> = the app in the demo. Upgrade S0→M1 later if you outgrow the Sheet.</p>
+
+  <h2>Full spec — where each requirement lands</h2>
   <table>
     <tr><th style="width:34%">Requirement</th><th>Implementation</th><th style="width:10%">Phase</th></tr>
     <tr><td>CSV / data import</td><td><code>POST /import/csv</code> with column mapping; contacts stored in PostgreSQL</td><td class="m">M1</td></tr>
@@ -184,9 +206,7 @@
   </table>
 
   <div class="note">
-    <strong>On the $400 budget:</strong> full spec is ~90 h of work (UI, DB, n8n, LLM layer, inbound parsing, scheduler, multi-campaign admin, handoff).
-    $400 buys a Zapier template, not something your team can run at 500+ contacts.
-    M1 ($950) is the real entry point — working app, not a mockup.
+    <strong>Budget:</strong> $450 covers S0 (~12 h). The full job post is ~90 h — that's M1–M4 ($3,450), not a single fixed price at $400.
   </div>
 
   <h2>Prior work that's relevant</h2>
@@ -304,8 +324,31 @@
   </div>
 
   <h1>Phased delivery</h1>
-  <p class="tagline">Pay per milestone. Stop after any phase. Code is yours after each payment.</p>
+  <p class="tagline">S0 if budget is fixed at ~$450. M1 if you want the demo as a real app. M2–M4 add the rest of the spec.</p>
 
+  <h2>S0 — Starter ($450 · 4–5 days)</h2>
+  <p style="font-family:ui-monospace,monospace;font-size:7pt;margin-bottom:2mm;">
+    CSV file → n8n → Claude → Google Sheet (subject, body, status)<br>
+    you edit / set status=approved → n8n → SMTP send → status=sent
+  </p>
+  <table>
+    <tr><th>Included</th><th>Not included (→ M1+)</th></tr>
+    <tr>
+      <td>1 n8n workflow · 1 campaign · Claude prompt · Google Sheet review · SMTP send on approved rows · export + Loom</td>
+      <td>Custom UI · PostgreSQL · audit table · reply detection · 14-day cron · multi-campaign dashboard · enrichment plugins</td>
+    </tr>
+  </table>
+
+  <h2>S0 sign-off — four checks</h2>
+  <table>
+    <tr><th>#</th><th>Check</th><th>Pass</th></tr>
+    <tr><td>1</td><td>CSV → Sheet</td><td>20+ rows with subject + body drafts</td></tr>
+    <tr><td>2</td><td>Review</td><td>You can edit text and set status manually</td></tr>
+    <tr><td>3</td><td>Send gate</td><td>Only <code>approved</code> rows trigger SMTP</td></tr>
+    <tr><td>4</td><td>Handoff</td><td>n8n workflow JSON + 5-min Loom</td></tr>
+  </table>
+
+  <h2>M1–M4 — production path</h2>
   <table>
     <tr><th>Phase</th><th>Price</th><th>Days</th><th>Deliverables</th></tr>
     <tr>
@@ -335,8 +378,8 @@
     </tr>
   </table>
 
-  <p><strong>Start with M1.</strong> It's usable on day 7–9 with real contacts. M2–M4 only after you sign off the previous phase.</p>
-  <p>Alternative: $42/hr capped at $3,800, same milestone structure.</p>
+  <p><strong>S0 → M1 upgrade:</strong> if you start with S0 and want the full app later, M1 is $950 (S0 workflow reused where possible — prompt, SMTP config, campaign copy).</p>
+  <p>Alternative: $42/hr capped at $3,800, same milestones.</p>
 
   <h2>M1 sign-off — six checks</h2>
   <table>
@@ -364,7 +407,7 @@
 <div class="page">
   <div class="top">
     <div class="who">Next steps</div>
-    <div class="meta">To start M1</div>
+    <div class="meta">Pick S0 or M1</div>
   </div>
 
   <h1>What I need from you</h1>
@@ -385,16 +428,16 @@
 
   <h2>To proceed</h2>
   <ol style="padding-left:5mm;font-size:8pt;line-height:1.6;">
-    <li>Open the demo — click through approve → send → follow-up</li>
-    <li>If the flow works for you, confirm M1 ($950)</li>
-    <li>Fixed-price contract on Upwork for milestone 1</li>
+    <li>Open the demo — that's the M1 UX target (S0 uses a Sheet instead)</li>
+    <li>Pick <strong>S0 ($450)</strong> or <strong>M1 ($950)</strong></li>
+    <li>Fixed-price contract on Upwork for that milestone</li>
     <li>Send CSV + credentials → I start within 24h</li>
   </ol>
 
   <div style="margin-top:8mm;padding-top:4mm;border-top:1.5pt solid var(--ink);display:flex;justify-content:space-between;align-items:baseline;">
     <div>
-      <div style="font-family:'Inter Tight';font-size:16pt;font-weight:700;color:var(--ink);">M1 · $950</div>
-      <div style="font-size:7.5pt;color:var(--mute);">Full spec: $3,450 across M1–M4</div>
+      <div style="font-family:'Inter Tight';font-size:14pt;font-weight:700;color:var(--ink);">S0 · $450</div>
+      <div style="font-size:7.5pt;color:var(--mute);margin-top:1mm;">or M1 · $950 · full spec · $3,450</div>
     </div>
     <div style="text-align:right;font-size:7.5pt;color:var(--mute);line-height:1.5;">
       Ainoa Figueroa Vidal · AI Engineer<br>
