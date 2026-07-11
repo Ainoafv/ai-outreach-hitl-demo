@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Outreach Studio — Interactive Demo</title>
+<style>
+  :root {
+    --bg: #0b1220;
+    --panel: #111827;
+    --card: #1a2332;
+    --border: #243044;
+    --text: #e5e7eb;
+    --muted: #94a3b8;
+    --accent: #3b82f6;
+    --accent-soft: rgba(59,130,246,.15);
+    --ok: #10b981;
+    --warn: #f59e0b;
+    --bad: #ef4444;
+    --purple: #a78bfa;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: radial-gradient(1200px 600px at 10% -10%, #1e3a5f 0%, var(--bg) 55%);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 14px;
+  }
+  .top {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 20px; border-bottom: 1px solid var(--border);
+    background: rgba(17,24,39,.85); backdrop-filter: blur(8px);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .logo { font-weight: 700; font-size: 15px; }
+  .logo span { color: var(--accent); }
+  .pill-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .pill {
+    font-size: 11px; padding: 4px 10px; border-radius: 999px;
+    background: var(--card); border: 1px solid var(--border); color: var(--muted);
+  }
+  .pill.live { border-color: var(--ok); color: #6ee7b7; background: rgba(16,185,129,.1); }
+  .layout { display: grid; grid-template-columns: 280px 1fr 380px; gap: 0; min-height: calc(100vh - 56px); }
+  .sidebar, .main, .preview {
+    padding: 16px; border-right: 1px solid var(--border);
+  }
+  .preview { border-right: none; background: rgba(0,0,0,.15); }
+  h2 { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 10px; }
+  .campaign {
+    padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--card); margin-bottom: 8px; cursor: pointer; transition: .15s;
+  }
+  .campaign.active { border-color: var(--accent); background: var(--accent-soft); }
+  .campaign strong { display: block; font-size: 13px; margin-bottom: 2px; }
+  .campaign small { color: var(--muted); font-size: 11px; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 16px; }
+  .stat {
+    background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 12px;
+  }
+  .stat b { display: block; font-size: 22px; margin-bottom: 2px; }
+  .stat span { font-size: 11px; color: var(--muted); }
+  .toolbar { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+  button, .btn {
+    border: none; border-radius: 8px; padding: 8px 14px; font-size: 12px; font-weight: 600;
+    cursor: pointer; background: var(--accent); color: #fff;
+  }
+  button.secondary { background: transparent; border: 1px solid var(--border); color: var(--text); }
+  button.ok { background: var(--ok); }
+  button.warn { background: var(--warn); color: #111; }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--border); }
+  th { color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .06em; }
+  tr { cursor: pointer; }
+  tr:hover td { background: rgba(255,255,255,.03); }
+  tr.selected td { background: var(--accent-soft); }
+  .status {
+    display: inline-block; font-size: 10px; font-weight: 700; padding: 3px 8px;
+    border-radius: 999px; text-transform: uppercase; letter-spacing: .04em;
+  }
+  .s-draft { background: rgba(148,163,184,.2); color: #cbd5e1; }
+  .s-approved { background: rgba(59,130,246,.2); color: #93c5fd; }
+  .s-sent { background: rgba(16,185,129,.2); color: #6ee7b7; }
+  .s-replied { background: rgba(167,139,250,.2); color: #c4b5fd; }
+  .s-followup { background: rgba(245,158,11,.2); color: #fcd34d; }
+  .preview-box {
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 14px; margin-bottom: 12px;
+  }
+  .preview-box label { display: block; font-size: 10px; color: var(--muted); margin-bottom: 4px; text-transform: uppercase; }
+  .preview-box .val { margin-bottom: 10px; font-size: 13px; line-height: 1.45; }
+  .email-body {
+    white-space: pre-wrap; font-size: 12px; line-height: 1.55; color: #d1d5db;
+    max-height: 220px; overflow: auto; padding: 10px; background: #0f172a; border-radius: 8px;
+  }
+  .enrich { display: flex; gap: 6px; flex-wrap: wrap; margin: 8px 0 12px; }
+  .tag { font-size: 10px; padding: 3px 8px; border-radius: 6px; background: #0f172a; border: 1px solid var(--border); color: var(--muted); }
+  .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .banner {
+    margin: 12px 20px 0; padding: 10px 14px; border-radius: 10px;
+    background: rgba(59,130,246,.12); border: 1px solid rgba(59,130,246,.35);
+    font-size: 12px; color: #bfdbfe;
+  }
+  .toast {
+    position: fixed; bottom: 20px; right: 20px; background: var(--ok); color: #fff;
+    padding: 10px 16px; border-radius: 8px; font-size: 12px; font-weight: 600;
+    opacity: 0; transform: translateY(8px); transition: .25s; pointer-events: none;
+  }
+  .toast.show { opacity: 1; transform: translateY(0); }
+  @media (max-width: 1100px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar, .preview { border-right: none; border-bottom: 1px solid var(--border); }
+  }
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="logo">AI Outreach <span>Studio</span> · Demo</div>
+  <div class="pill-row">
+    <span class="pill live">● Human-in-the-loop</span>
+    <span class="pill">Claude / OpenAI</span>
+    <span class="pill">Multi-campaign</span>
+    <span class="pill">GDPR-aware</span>
+  </div>
+</div>
+<div class="banner">Interactive prototype — click contacts, approve drafts, simulate send &amp; 14-day follow-up. Built by Ainoa Figueroa Vidal for Upwork proposal.</div>
+
+<div class="layout">
+  <aside class="sidebar">
+    <h2>Campaigns</h2>
+    <div class="campaign active" data-campaign="dach">
+      <strong>DACH — SaaS founders</strong>
+      <small>42 contacts · Prompt v3</small>
+    </div>
+    <div class="campaign" data-campaign="health">
+      <strong>Healthcare partners</strong>
+      <small>28 contacts · Prompt v1</small>
+    </div>
+    <div class="campaign" data-campaign="retail">
+      <strong>Retail expansion</strong>
+      <small>15 contacts · Draft</small>
+    </div>
+    <h2 style="margin-top:20px">Pipeline</h2>
+    <p style="font-size:12px;color:var(--muted);line-height:1.5">
+      CSV import → enrich (company URL, role) → Claude draft → <strong style="color:#93c5fd">you approve</strong> → SMTP send → inbox watch → auto follow-up day 14
+    </p>
+  </aside>
+
+  <section class="main">
+    <div class="stats">
+      <div class="stat"><b id="st-draft">8</b><span>Draft</span></div>
+      <div class="stat"><b id="st-approved">3</b><span>Approved</span></div>
+      <div class="stat"><b id="st-sent">24</b><span>Sent</span></div>
+      <div class="stat"><b id="st-replied">7</b><span>Replied</span></div>
+    </div>
+    <div class="toolbar">
+      <button class="secondary" onclick="importCsv()">Import CSV</button>
+      <button onclick="generateSelected()">Generate AI drafts</button>
+      <button class="secondary" onclick="runFollowup()">Run 14-day follow-up check</button>
+    </div>
+    <table>
+      <thead>
+        <tr><th>Contact</th><th>Company</th><th>Status</th><th>Last action</th></tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </section>
+
+  <aside class="preview">
+    <h2>Review &amp; approve</h2>
+    <div class="preview-box">
+      <label>To</label>
+      <div class="val" id="pv-to">—</div>
+      <label>Subject</label>
+      <div class="val" id="pv-subject">—</div>
+      <div class="enrich" id="pv-tags"></div>
+      <label>Body</label>
+      <div class="email-body" id="pv-body">Select a contact to preview the AI draft.</div>
+    </div>
+    <div class="actions">
+      <button class="ok" onclick="approve()">✓ Approve</button>
+      <button class="secondary" onclick="editDraft()">Edit</button>
+      <button class="warn" onclick="reject()">Reject</button>
+      <button onclick="sendApproved()">Send approved</button>
+    </div>
+  </aside>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const contacts = [
+  { id:1, name:"Anna Weber", email:"a.weber@alpensoft.ch", company:"AlpenSoft AG", role:"CEO", status:"draft", last:"Draft generated 2m ago",
+    tags:["Website: alpensoft.ch","Industry: B2B SaaS","LinkedIn: public headline"],
+    subject:"Quick idea for AlpenSoft's DACH outreach",
+    body:"Hi Anna,\n\nI noticed AlpenSoft recently expanded your partner program in Switzerland. We help teams like yours run AI-personalized disclosure emails with human approval before every send — no spray-and-pray.\n\nWould a 15-minute async walkthrough be useful?\n\nBest,\n[Your name]" },
+  { id:2, name:"Marco Rossi", email:"marco@nexhub.io", company:"NexHub", role:"Head of Growth", status:"approved", last:"Approved today",
+    tags:["Series A","HubSpot user","DE market"],
+    subject:"NexHub + compliant AI outreach",
+    body:"Hi Marco,\n\nCongrats on the NexHub Series A announcement. Given your growth motion in DE, a governed outreach workflow (draft → approve → send → 14d follow-up) might save your team hours weekly.\n\nOpen to a short demo link?\n\nBest,\n[Your name]" },
+  { id:3, name:"Sofia Lindström", email:"sofia@nordicdata.se", company:"Nordic Data", role:"Marketing Dir.", status:"sent", last:"Sent 3 days ago",
+    tags:["Public pricing page","Content-led"],
+    subject:"Follow-up on Nordic Data campaign ops",
+    body:"Hi Sofia,\n\nFollowing up on my note about modular outreach campaigns. Happy to share how we structure multi-audience prompts without losing brand voice.\n\nBest,\n[Your name]" },
+  { id:4, name:"Thomas Müller", email:"t.mueller@healthbridge.de", company:"HealthBridge", role:"Partnerships", status:"replied", last:"Replied yesterday",
+    tags:["Healthcare","GDPR-sensitive"],
+    subject:"Re: HealthBridge partner outreach",
+    body:"Hi Thomas,\n\nThanks for your reply — attaching the one-pager on human-in-the-loop email automation for regulated sectors.\n\nBest,\n[Your name]" },
+  { id:5, name:"Elena Kovač", email:"elena@retailplus.hr", company:"RetailPlus", role:"COO", status:"followup", last:"Follow-up sent today",
+    tags:["Retail","Multi-country"],
+    subject:"Checking in — RetailPlus expansion",
+    body:"Hi Elena,\n\nCircling back after 14 days — still happy to show the approval dashboard if useful for your retail outreach.\n\nBest,\n[Your name]" },
+  { id:6, name:"Jonas Berg", email:"jonas@cloudnine.no", company:"CloudNine", role:"Founder", status:"draft", last:"Imported from CSV",
+    tags:["Website: cloudnine.no","Bootstrapped"],
+    subject:"CloudNine — smarter cold outreach?",
+    body:"Hi Jonas,\n\nSaw CloudNine's latest case study on Nordic logistics APIs. We built a reusable outreach app: CSV in, personalized drafts out, nothing sends until you approve.\n\nWorth a look?\n\nBest,\n[Your name]" },
+];
+
+let selected = contacts[0];
+const statusClass = { draft:"s-draft", approved:"s-approved", sent:"s-sent", replied:"s-replied", followup:"s-followup" };
+const statusLabel = { draft:"Draft", approved:"Approved", sent:"Sent", replied:"Replied", followup:"Follow-up sent" };
+
+function renderRows() {
+  document.getElementById("rows").innerHTML = contacts.map(c => `
+    <tr class="${selected.id===c.id?'selected':''}" onclick="select(${c.id})">
+      <td><strong>${c.name}</strong><br><span style="color:var(--muted);font-size:11px">${c.email}</span></td>
+      <td>${c.company}</td>
+      <td><span class="status ${statusClass[c.status]}">${statusLabel[c.status]}</span></td>
+      <td style="color:var(--muted);font-size:11px">${c.last}</td>
+    </tr>`).join("");
+  updateStats();
+}
+
+function select(id) {
+  selected = contacts.find(c => c.id === id);
+  document.getElementById("pv-to").textContent = `${selected.name} <${selected.email}>`;
+  document.getElementById("pv-subject").textContent = selected.subject;
+  document.getElementById("pv-body").textContent = selected.body;
+  document.getElementById("pv-tags").innerHTML = selected.tags.map(t => `<span class="tag">${t}</span>`).join("");
+  renderRows();
+}
+
+function updateStats() {
+  const c = { draft:0, approved:0, sent:0, replied:0, followup:0 };
+  contacts.forEach(x => c[x.status]++);
+  document.getElementById("st-draft").textContent = c.draft;
+  document.getElementById("st-approved").textContent = c.approved;
+  document.getElementById("st-sent").textContent = c.sent + c.followup;
+  document.getElementById("st-replied").textContent = c.replied;
+}
+
+function toast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg; t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 2200);
+}
+
+function approve() {
+  if (selected.status === "draft") { selected.status = "approved"; selected.last = "Approved just now"; toast("Approved — ready to send"); select(selected.id); }
+}
+function reject() { toast("Draft rejected — will regenerate"); }
+function editDraft() { toast("Edit mode (production: inline editor)"); }
+function sendApproved() {
+  contacts.filter(c => c.status === "approved").forEach(c => { c.status = "sent"; c.last = "Sent just now"; });
+  toast("Sent all approved emails via SMTP");
+  renderRows(); if (selected) select(selected.id);
+}
+function importCsv() { toast("CSV imported — 6 contacts (demo)"); }
+function generateSelected() { toast("Claude generated drafts for draft contacts"); }
+function runFollowup() {
+  contacts.filter(c => c.status === "sent").slice(0,1).forEach(c => { c.status = "followup"; c.last = "14-day follow-up sent"; });
+  toast("Follow-up job complete");
+  renderRows();
+}
+
+document.querySelectorAll(".campaign").forEach(el => {
+  el.addEventListener("click", () => {
+    document.querySelectorAll(".campaign").forEach(x => x.classList.remove("active"));
+    el.classList.add("active");
+    toast("Switched campaign: " + el.querySelector("strong").textContent);
+  });
+});
+
+select(1);
+</script>
+</body>
+</html>
