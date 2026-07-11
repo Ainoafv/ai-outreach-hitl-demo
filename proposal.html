@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>AI Outreach Application — Technical Proposal &amp; Honest Scope</title>
+<title>AI Outreach Application — Technical Proposal</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@700;800&family=Inter:wght@400;500;600&display=swap');
   @page { size: A4; margin: 10mm; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  :root { --ink:#0f172a; --accent:#2563eb; --soft:#eff6ff; --warn:#b45309; --warn-bg:#fffbeb; --bad:#b91c1c; --bad-bg:#fef2f2; --ok:#059669; --rule:#e2e8f0; --mute:#64748b; }
+  :root { --ink:#0f172a; --accent:#2563eb; --soft:#eff6ff; --warn:#b45309; --warn-bg:#fffbeb; --ok:#059669; --rule:#e2e8f0; --mute:#64748b; }
   body { font-family: Inter, sans-serif; font-size: 8.8pt; color: #334155; background: #eef2f7; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .page { width: 210mm; min-height: 287mm; margin: 0 auto 8mm; background: #fff; padding: 10mm 12mm; page-break-after: always; }
   .page:last-child { page-break-after: auto; }
@@ -21,7 +21,10 @@
   table { width: 100%; border-collapse: collapse; font-size: 6.8pt; margin: 1.5mm 0 2mm; }
   th { background: var(--ink); color: #fff; padding: 1.3mm 2mm; text-align: left; }
   td { padding: 1.2mm 2mm; border-top: 1px solid var(--rule); vertical-align: top; }
-  .alert-bad { background: var(--bad-bg); border: 1px solid #fecaca; border-left: 3px solid var(--bad); padding: 2.5mm 3mm; border-radius: 2mm; margin: 2mm 0; font-size: 7.2pt; }
+  .yes { color: var(--ok); font-weight: 700; }
+  .phase { color: var(--accent); font-weight: 600; }
+  .links { background: var(--soft); border: 1px solid #93c5fd; border-radius: 2mm; padding: 2.5mm 3mm; margin: 2mm 0; font-size: 7.2pt; }
+  .links a { color: var(--accent); text-decoration: none; font-weight: 600; }
   .alert-warn { background: var(--warn-bg); border: 1px solid #fde68a; border-left: 3px solid var(--warn); padding: 2.5mm 3mm; border-radius: 2mm; margin: 2mm 0; font-size: 7.2pt; }
   .alert-ok { background: #ecfdf5; border: 1px solid #86efac; border-left: 3px solid var(--ok); padding: 2.5mm 3mm; border-radius: 2mm; margin: 2mm 0; font-size: 7.2pt; }
   .flow { background: var(--soft); border: 1px solid #93c5fd; border-radius: 2mm; padding: 2.5mm; font-family: ui-monospace, monospace; font-size: 6.2pt; line-height: 1.45; white-space: pre-wrap; margin: 1.5mm 0; }
@@ -34,191 +37,179 @@
 </head>
 <body>
 
-<!-- PAGE 1 -->
 <div class="page">
   <div class="brand">
     <div>
       <div class="brand-name">Ainoa Figueroa Vidal</div>
       <div style="font-size:6pt;color:var(--mute);text-transform:uppercase;">AI Engineer · Outreach Automation · EU</div>
     </div>
-    <div style="font-size:6pt;color:var(--mute);text-align:right;">Jul 2026 · Fixed-price proposal</div>
+    <div style="font-size:6pt;color:var(--mute);text-align:right;">Jul 2026 · Proposal for Charly Suter</div>
   </div>
 
-  <h1>AI Disclosure Outreach Application<br><span style="color:var(--accent);font-size:9pt;">Architecture, honest pricing, phased delivery</span></h1>
-  <p class="lead">For Swiss client — modular outreach app: CSV import, AI personalization, human approval, send, reply monitoring, 14-day follow-up, multi-campaign dashboard. <strong>Interactive demo included.</strong></p>
+  <h1>AI-Powered Email Outreach Application<br><span style="color:var(--accent);font-size:9pt;">Architecture · phased delivery · interactive demo</span></h1>
+  <p class="lead">Modular outreach system: CSV import, AI-personalized disclosure emails, human approval before send, inbound reply tracking, 14-day follow-up, multi-campaign dashboard — built for reuse across campaigns, topics, and audiences.</p>
 
-  <div class="alert-bad">
-    <strong>Direct answer on the $400 budget:</strong> A production-ready version of everything in your job post is <strong>80–120+ engineering hours</strong> (UI, database, n8n orchestration, LLM layer, SMTP, inbound parsing, follow-up scheduler, multi-campaign admin, docs, deployment). At $400 fixed, the market delivers one of three outcomes: (1) a broken Zapier/Make template with no approval UI, (2) abandoned mid-project, or (3) code you cannot maintain. <strong>I will not bid $400 for the full scope.</strong> Below is what each price point actually buys — and a phased path that matches your long-term partner goal.
+  <div class="links">
+    <strong>Live materials (no download needed):</strong><br>
+    Interactive demo → <a href="https://ainoafv.github.io/ai-outreach-hitl-demo/">ainoafv.github.io/ai-outreach-hitl-demo</a><br>
+    This proposal → <a href="https://ainoafv.github.io/ai-outreach-hitl-demo/proposal.html">…/proposal.html</a>
   </div>
 
-  <h2>What $400 actually buys (Phase 0 — optional entry)</h2>
+  <h2>Your requirements → how we deliver</h2>
   <table>
-    <tr><th>Included</th><th>Not included</th></tr>
-    <tr>
-      <td>Interactive demo (deployed URL) with your branding<br>Architecture PDF (this document, pages 1–3)<br>Fixed-price roadmap + milestone breakdown<br>30-min async Q&amp;A (Loom)</td>
-      <td>Production database · live SMTP · inbox monitoring · follow-up cron · source handoff · multi-campaign admin</td>
-    </tr>
+    <tr><th>Your spec</th><th>Delivery</th><th>Phase</th></tr>
+    <tr><td>Import contacts (CSV / data sources)</td><td>CSV upload + column mapping; API hook in M4</td><td class="phase">M1</td></tr>
+    <tr><td>AI-personalized outreach emails</td><td>Claude/OpenAI · structured JSON · prompt per campaign</td><td class="phase">M1</td></tr>
+    <tr><td>Enrichment (website, company data)</td><td>CSV fields + optional public URL fetch · no LinkedIn scrape</td><td class="phase">M4</td></tr>
+    <tr><td>Review · edit · approve before send</td><td>Next.js dashboard (see live demo)</td><td class="phase">M1</td></tr>
+    <tr><td>Send approved emails automatically</td><td>SMTP / Gmail via n8n queue · approved-only gate</td><td class="phase">M1</td></tr>
+    <tr><td>Monitor inbound replies</td><td>IMAP/webhook parser → status = Replied</td><td class="phase">M2</td></tr>
+    <tr><td>14-day follow-up if no reply</td><td>Scheduler + AI follow-up draft + approval</td><td class="phase">M2</td></tr>
+    <tr><td>Dashboard (Draft / Sent / Replied…)</td><td>Full status board + campaign KPIs</td><td class="phase">M3</td></tr>
+    <tr><td>Multiple campaigns · modular extensibility</td><td>Campaign model · prompt templates · plugin hooks</td><td class="phase">M3–M4</td></tr>
+    <tr><td>Source code · docs · deployment · ownership</td><td>Repo handoff · runbook · Loom · Docker deploy</td><td class="phase">M4</td></tr>
   </table>
-  <p><strong>Phase 0: $400 fixed · 3 days</strong> — decision asset only. Useful if you want to validate UX before funding build.</p>
 
-  <h2>Recommended architecture (production)</h2>
-  <div class="flow">CSV / API import
-→ PostgreSQL (contacts, campaigns, states, email history)
-→ Enrichment layer (company URL fetch, CSV fields — no LinkedIn scrape without official API)
-→ Claude / OpenAI (structured JSON: subject, body, personalization rationale)
-→ Review UI (Next.js): Draft → Edit → Approve → Reject
-→ n8n: approved-only send queue → SMTP / Gmail
-→ Inbound webhook/IMAP parser → status = Replied
-→ Scheduler: no reply 14d → generate follow-up → approval gate → send
-→ Dashboard: campaign KPIs + audit log</div>
+  <h2>Architecture</h2>
+  <div class="flow">CSV import → PostgreSQL (contacts, campaigns, audit)
+→ Enrichment (CSV + optional website text)
+→ LLM (Claude primary) → structured subject + body + rationale
+→ Review UI: Draft → Edit → Approve → Reject
+→ n8n: send queue (approved only) → SMTP/Gmail
+→ Inbound parser → Replied
+→ Day-14 cron → follow-up draft → approval → send
+→ Dashboard + exportable audit log</div>
 
   <div class="grid2">
     <div class="card">
-      <h3>Why n8n + FastAPI + Next.js</h3>
+      <h3>Stack (matches your brief)</h3>
       <ul>
-        <li><strong>n8n</strong> — send queues, retries, cron, webhooks; your team can edit flows visually</li>
-        <li><strong>FastAPI</strong> — LLM calls, enrichment, state machine, GDPR-safe logging</li>
-        <li><strong>Next.js</strong> — approval dashboard your staff actually uses</li>
-        <li><strong>PostgreSQL</strong> — single source of truth for campaigns + audit</li>
+        <li><strong>n8n</strong> — workflows, cron, webhooks, retries</li>
+        <li><strong>Claude / OpenAI</strong> — personalization + follow-ups</li>
+        <li><strong>FastAPI + PostgreSQL</strong> — state + audit</li>
+        <li><strong>Next.js</strong> — approval UI your team uses daily</li>
       </ul>
     </div>
     <div class="card">
-      <h3>Compliance (Switzerland / EU)</h3>
+      <h3>Switzerland / EU</h3>
       <ul>
-        <li>Human approval before every outbound send (default)</li>
-        <li>No automated LinkedIn scraping (ToS + GDPR risk)</li>
-        <li>Enrichment: CSV columns + optional public website text fetch</li>
-        <li>Full audit trail per contact + campaign</li>
+        <li>Human approval default — nothing sends unattended</li>
+        <li>No LinkedIn scraping (ToS + nDSG/GDPR risk)</li>
+        <li>Audit trail per contact · campaign · send</li>
+        <li>German UI labels available from M3 if needed</li>
       </ul>
     </div>
   </div>
 
-  <h2>Similar work</h2>
-  <ul>
-    <li>Outbound agent with <strong>human-in-the-loop before any external send</strong> + audit log (US B2B client, production)</li>
-    <li>CRM lead classifier + structured JSON + reason codes (OpenAI, real business rules)</li>
-    <li>Hospital-grade AI pipelines: fail-closed, nothing ships unapproved</li>
-    <li>Public demo: <strong>ainoafv.github.io/agent-engineering-demo</strong> — approval gates in 2 min</li>
-  </ul>
+  <div class="alert-warn">
+    <strong>On the $400 fixed budget:</strong> Your job post describes a full production app (~80–120 h). I won't deliver a brittle template at that price — you'll get something unmaintainable or unfinished. Instead: <strong>fund M1 first</strong>, use it immediately, expand only after sign-off. Phases and pricing on page 2.
+  </div>
 
-  <div class="footer"><span>Page 1/3</span><span>Interactive demo: ai-outreach-hitl-demo.html</span></div>
+  <div class="footer"><span>Page 1/3</span><span>Demo + proposal links above</span></div>
 </div>
 
-<!-- PAGE 2 -->
 <div class="page">
-  <div class="brand"><div class="brand-name">Phased delivery — production path</div></div>
+  <div class="brand"><div class="brand-name">Phased fixed-price delivery</div></div>
 
-  <h1>Fixed-price milestones (full job spec)</h1>
-  <p class="lead">Matches every requirement in your posting. Total <strong>$3,450</strong> — still ~$30/h effective, not fantasy pricing.</p>
+  <h1>Milestones — full spec covered</h1>
+  <p class="lead">Pay per phase. Stop after any milestone if the app meets your needs. Total for complete spec: <strong>$3,450</strong>.</p>
 
   <table>
-    <tr><th>Phase</th><th>Price</th><th>Days</th><th>Deliverables</th></tr>
+    <tr><th>Phase</th><th>Price</th><th>Days</th><th>You get</th></tr>
     <tr>
-      <td><strong>M1 — Core loop</strong></td>
+      <td><strong>M1 — Core loop ★</strong></td>
       <td>$950</td>
       <td>7–9</td>
-      <td>CSV import · 1 campaign · Claude drafts · <strong>approval UI</strong> · SMTP send approved only · PostgreSQL · deploy + docs</td>
+      <td>CSV · 1 campaign · AI drafts · <strong>approval UI</strong> · SMTP send · PostgreSQL · staging deploy · docs</td>
     </tr>
     <tr>
       <td><strong>M2 — Inbox + follow-up</strong></td>
       <td>$900</td>
       <td>6–8</td>
-      <td>Inbound reply detection · status = Replied · <strong>14-day follow-up</strong> generator + approval · scheduler</td>
+      <td>Reply detection · 14-day follow-up · approval gate · scheduler</td>
     </tr>
     <tr>
       <td><strong>M3 — Multi-campaign</strong></td>
       <td>$850</td>
       <td>5–7</td>
-      <td>Multiple campaigns · prompt/template per campaign · dashboard (Draft/Approved/Sent/Replied/Follow-up) · n8n orchestration export</td>
+      <td>Multiple campaigns · prompts per campaign · full status dashboard · n8n export</td>
     </tr>
     <tr>
       <td><strong>M4 — Enrichment + handoff</strong></td>
       <td>$750</td>
       <td>4–6</td>
-      <td>Company URL enrichment · modular plugin hooks · source code transfer · technical runbook · Loom training</td>
+      <td>Website enrichment · plugin architecture · full source transfer · runbook · Loom training</td>
     </tr>
-    <tr>
-      <td colspan="2"><strong>Total production</strong></td>
-      <td colspan="2"><strong>$3,450 fixed · ~22–30 working days · full ownership to you</strong></td>
-    </tr>
+    <tr><td colspan="2"><strong>Total</strong></td><td colspan="2"><strong>$3,450 · full ownership · ~4 weeks elapsed</strong></td></tr>
   </table>
 
-  <div class="alert-warn">
-    <strong>Why not $400 for all of this?</strong> M1 alone (approval UI + DB + LLM + SMTP) is already 25–35 hours minimum for maintainable code. A $400 bid implies $11–16/h for senior full-stack + AI work — or corners cut on security, error handling, and the approval workflow that protects your brand.
-  </div>
-
-  <h2>What competitors at $350–400 will deliver</h2>
+  <h2>M1 acceptance checklist (sign-off criteria)</h2>
   <table>
-    <tr><th>Their deliverable</th><th>Your gap</th></tr>
-    <tr><td>Google Sheet + ChatGPT manual paste</td><td>No approval UI, no inbound tracking, no 14d automation</td></tr>
-    <tr><td>Single n8n flow, no database</td><td>No multi-campaign, no audit, breaks at 500+ contacts</td></tr>
-    <tr><td>UI mockup only</td><td>Not production-ready despite job requirement</td></tr>
-    <tr><td>LinkedIn scrape bot</td><td>Account ban + GDPR exposure (especially CH/EU)</td></tr>
+    <tr><th>#</th><th>Test</th><th>Pass when</th></tr>
+    <tr><td>1</td><td>CSV import</td><td>≥50 contacts imported with mapped columns</td></tr>
+    <tr><td>2</td><td>AI draft</td><td>Claude generates subject + body from contact row + campaign prompt</td></tr>
+    <tr><td>3</td><td>Approval gate</td><td>Unapproved emails cannot send</td></tr>
+    <tr><td>4</td><td>Send</td><td>Approved email delivers via your SMTP/Gmail on staging</td></tr>
+    <tr><td>5</td><td>Audit</td><td>Every action logged with timestamp + user + status</td></tr>
+    <tr><td>6</td><td>Handoff</td><td>Repo + env docs + 5-min Loom walkthrough</td></tr>
   </table>
-
-  <h2>Alternative: hourly with cap</h2>
-  <p>If you prefer flexibility: <strong>$42/hr</strong>, capped at <strong>$3,800</strong>, same milestones as above. You see progress weekly; I stop at cap unless you extend.</p>
 
   <div class="alert-ok">
-    <strong>My recommendation:</strong> Fund <strong>M1 ($950)</strong> first. You get a working app your team uses immediately. M2–M4 only after M1 sign-off. This de-risks both sides and matches how you've successfully run phased AI projects on Upwork before.
+    <strong>Recommendation:</strong> Start with <strong>M1 ($950)</strong>. You have a working tool in ~1 week. M2 adds the reply/follow-up automation from your spec. No need to fund the full $3,450 upfront.
   </div>
 
-  <div class="footer"><span>Page 2/3</span><span>M1 alone &gt; posted budget — by design</span></div>
+  <h2>Alternative</h2>
+  <p>Hourly <strong>$42/hr</strong> with cap <strong>$3,800</strong>, same milestones — if you prefer weekly visibility over fixed blocks.</p>
+
+  <div class="footer"><span>Page 2/3</span><span>M1 = working app, not a mockup</span></div>
 </div>
 
-<!-- PAGE 3 -->
 <div class="page">
-  <div class="brand"><div class="brand-name">Demo · timeline · next steps</div></div>
+  <div class="brand"><div class="brand-name">Timeline · next steps</div></div>
 
-  <h1>Interactive demo (included with proposal)</h1>
-  <p class="lead">Open <strong>ai-outreach-hitl-demo.html</strong> in any browser — click contacts, approve drafts, simulate send &amp; 14-day follow-up. This is the UX target for M1.</p>
-
-  <h2>M1 timeline (if funded this week)</h2>
+  <h1>M1 schedule (from funding)</h1>
   <table>
-    <tr><th>Day</th><th>Output</th></tr>
-    <tr><td>1–2</td><td>DB schema · CSV import · campaign model · Claude prompt v1</td></tr>
-    <tr><td>3–5</td><td>Approval UI · edit flow · SMTP integration · staging deploy</td></tr>
-    <tr><td>6–7</td><td>3 real contacts end-to-end test · bugfix · docs + Loom handoff</td></tr>
+    <tr><th>Day</th><th>Deliverable</th></tr>
+    <tr><td>1–2</td><td>Schema · CSV import · campaign + prompt model</td></tr>
+    <tr><td>3–5</td><td>Approval UI · edit flow · SMTP · staging deploy</td></tr>
+    <tr><td>6–7</td><td>3 real contacts end-to-end · fixes · docs + Loom</td></tr>
   </table>
 
-  <h2>Technologies (your stack + my recommendation)</h2>
-  <table>
-    <tr><th>Layer</th><th>Tool</th><th>Why</th></tr>
-    <tr><td>Automation</td><td>n8n</td><td>Matches your spec; visual maintenance; cron + webhooks</td></tr>
-    <tr><td>LLM</td><td>Claude Sonnet (primary)</td><td>Best long-context personalization; OpenAI fallback optional</td></tr>
-    <tr><td>Backend</td><td>FastAPI + PostgreSQL</td><td>State machine, audit, modular enrichment plugins</td></tr>
-    <tr><td>Frontend</td><td>Next.js</td><td>Review/approve dashboard; DE UI labels in M3 if needed</td></tr>
-    <tr><td>Email</td><td>SMTP / Gmail API</td><td>Your credentials; draft or send modes</td></tr>
-    <tr><td>Deploy</td><td>Docker on your VPS / AWS</td><td>You own infrastructure; no lock-in to my hosting</td></tr>
-  </table>
+  <h2>What I need from you to start</h2>
+  <ul>
+    <li>Sample CSV (or anonymized export) + 2–3 example emails that worked well</li>
+    <li>SMTP/Gmail credentials (staging) + Claude or OpenAI API key</li>
+    <li>Campaign copy guidelines (tone, disclosure rules, forbidden claims)</li>
+    <li>Confirm: German UI in M1, or English OK for v1?</li>
+  </ul>
+
+  <h2>Relevant experience</h2>
+  <ul>
+    <li>Production outbound with <strong>human-in-the-loop + audit</strong> before any external send</li>
+    <li>CRM AI classification — structured JSON, reason codes, real business rules</li>
+    <li>Regulated AI (EU hospital) — fail-closed, nothing ships unapproved</li>
+    <li>Demo: <a href="https://ainoafv.github.io/agent-engineering-demo/">agent-engineering-demo</a></li>
+  </ul>
 
   <h2>Working model</h2>
   <ul>
-    <li>Async-first — written updates + Loom; no standing calls required</li>
-    <li>You provide: API keys, SMTP, sample CSV, 2–3 example emails, campaign copy guidelines</li>
-    <li>I deliver: clean repo, deployment support, milestone acceptance checklist per phase</li>
+    <li>Async-first — Loom + written updates; no standing calls required</li>
+    <li>You own 100% of code after each milestone</li>
+    <li>Long-term partner mindset — same phased rhythm as your prior AI builds on Upwork</li>
   </ul>
-
-  <h2>Bid summary (choose one)</h2>
-  <table>
-    <tr><th>Option</th><th>Price</th><th>What you get</th></tr>
-    <tr><td>A — Phase 0 only</td><td><strong>$400</strong></td><td>Demo deployed + architecture + roadmap (no production code)</td></tr>
-    <tr><td>B — Production start ★</td><td><strong>$950 (M1)</strong></td><td>Working approval + send app; fund M2–M4 later</td></tr>
-    <tr><td>C — Full spec</td><td><strong>$3,450</strong></td><td>All 4 milestones · complete job description</td></tr>
-  </table>
 
   <div style="margin-top:4mm;display:flex;justify-content:space-between;align-items:flex-end;">
     <div>
-      <div class="price-big">$950</div>
-      <div style="font-size:7pt;color:var(--mute);">Recommended opening bid · M1 · not $400 for full app</div>
+      <div class="price-big">M1 · $950</div>
+      <div style="font-size:7pt;color:var(--mute);">Recommended start · full spec = $3,450 across 4 phases</div>
     </div>
     <div style="text-align:right;font-size:7pt;color:var(--mute);">
       Ainoa Figueroa Vidal<br>
-      github.com/Ainoafv · Spain (EU) · English delivery · DE UI optional
+      github.com/Ainoafv · Spain (EU)
     </div>
   </div>
 
-  <div class="footer"><span>Page 3/3</span><span>Honest scope beats cheap disappointment</span></div>
+  <div class="footer"><span>Page 3/3</span><span>Questions welcome on Upwork — happy to adjust phases</span></div>
 </div>
 </body>
 </html>
